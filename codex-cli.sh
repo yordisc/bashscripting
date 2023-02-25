@@ -1,6 +1,11 @@
-#!/bin/bash
-# Hecho por Yordis Cujar
-# Version 1
+#!/bin/bash 
+### Hecho por Yordis Cujar
+
+FECHA=$(date +"%Y-%m-%d")
+
+# https://github.com/microsoft/Codex-CLI
+## Once configured for your shell of preference, you can use the Codex CLI by writing a comment (starting with #) into your shell, and then hitting Ctrl + G.
+
 
 function chiguire()
 
@@ -45,6 +50,7 @@ function fabricante()
 
 }		
 
+
 function inicio()
 
 {
@@ -52,57 +58,66 @@ function inicio()
 		clear
 			echo " "
 			echo " "
-			echo -e "\033[34m#######################################"
-			echo -e "\033[34m# Instalador de PhpMyAdmin para XAMPP #"
-			echo -e "\033[34m#######################################"
+			echo -e "\033[34m##############################"
+			echo -e "\033[34m##### Instalar Codex-CLI #####"
+			echo -e "\033[34m##############################"
 			echo " "
-			echo " "
+						sleep 2s
+		clear
+			echo " Antes de instalar ten a la mano el ORG-ID / API-KEY / Engine ID "
+			echo " Mas información en: https://github.com/microsoft/Codex-CLI"
 			sleep 2s
 		clear
 
-}	
-
-function phpmyadmin()
-
-{
-		### PhpMyAdmin
-			sudo mv /opt/lampp/phpmyadmin/config.inc.php /opt/
-			cd
-			wget -O phpmyadmin.zip https://files.phpmyadmin.net/phpMyAdmin/$phpmyadminversion/phpMyAdmin-$phpmyadminversion-all-languages.zip
-			unzip phpmyadmin.zip
-			rm phpmyadmin.zip
-			mv phpMyAdmin* phpmyadmin
-			sudo chmod 777 /opt/lampp/phpmyadmin
-			sudo rm -r /opt/lampp/phpmyadmin
-			sudo mv phpmyadmin /opt/lampp/
-			sudo mv /opt/config.inc.php /opt/lampp/phpmyadmin
-			sudo chmod 755 /opt/lampp/phpmyadmin
-			sudo mkdir /opt/lampp/phpmyadmin/tmp/
-			sudo chmod 777 /opt/lampp/phpmyadmin/tmp/
-			cd
-		clear
-		echo "Instalado PhpMyAdmin"
-}	
+}		
 
 
-function version()
+function correccion()
 
 {
-phpmyadminversion='5.2.1'
-			echo "elige la versión de PhpMyAdmin:(versión actual - 5.2.1)"
-			read VAR_NAME
-			echo "elegiste la versión de PhpMyAdmin: ($VAR_NAME)"
-		sleep 2s
-$VAR_NAME=$phpmyadminversion
-		clear
+ ## Modificacion eliminando de la linea 46 eliminando ''
+sudo chmod -R 777 $HOME/.codex-cli/scripts/zsh_setup.sh
+sudo sed -i "46s/ '' '/ '/g" zsh_setup.sh
+
 }
 
 
+function installcodex()
+
+{
+		clear
+			echo -e "\033[32mIniciando..."
+			sleep 2s
+			### Requerimientos
+			pip uninstall openai
+			pip install --upgrade pip
+			pip install openai
+			### OpenIA-terminal ###
+			cd
+			rm -r $HOME/.codex-cli
+			mkdir $HOME/.codex-cli
+			sudo chmod -R 777 $HOME/.codex-cli
+			sudo chown -R $USER $HOME/.codex-cli
+			git clone https://github.com/microsoft/Codex-CLI.git $HOME/.codex-cli
+			cd $HOME/.codex-cli/scripts
+			###
+			correccion
+			###
+			./zsh_setup.sh
+			### ./zsh_cleanup.sh
+## ORG-ID
+## Modelo
+## API-KEY
+			echo -e "\033[32m#----------------------------Instalado Codex-cli (ChatGPT para terminal)-----------------------------#"
+			echo -e "\033[32m#----------------------------Para usar solo escribe algo comentado ( # ) y luego usa Ctrl + G.-------#"
+						sleep 2s
+}
+
+
+##### Inicio del programa ######
 			fabricante
 			chiguire
 			inicio
-			version
-			phpmyadmin
+			installcodex
 			chiguire
 			fabricante
-

@@ -1,6 +1,6 @@
-#!/bin/bash
-# Hecho por Yordis Cujar
-# Version 1
+#!/bin/bash 
+### Hecho por Yordis Cujar
+FECHA=$(date +"%Y-%m-%d")
 
 function chiguire()
 
@@ -45,6 +45,7 @@ function fabricante()
 
 }		
 
+
 function inicio()
 
 {
@@ -52,57 +53,64 @@ function inicio()
 		clear
 			echo " "
 			echo " "
-			echo -e "\033[34m#######################################"
-			echo -e "\033[34m# Instalador de PhpMyAdmin para XAMPP #"
-			echo -e "\033[34m#######################################"
+			echo -e "\033[34m##############################"
+			echo -e "\033[34m# Instalar versión de Python #"
+			echo -e "\033[34m##############################"
 			echo " "
 			echo " "
 			sleep 2s
 		clear
 
-}	
-
-function phpmyadmin()
-
-{
-		### PhpMyAdmin
-			sudo mv /opt/lampp/phpmyadmin/config.inc.php /opt/
-			cd
-			wget -O phpmyadmin.zip https://files.phpmyadmin.net/phpMyAdmin/$phpmyadminversion/phpMyAdmin-$phpmyadminversion-all-languages.zip
-			unzip phpmyadmin.zip
-			rm phpmyadmin.zip
-			mv phpMyAdmin* phpmyadmin
-			sudo chmod 777 /opt/lampp/phpmyadmin
-			sudo rm -r /opt/lampp/phpmyadmin
-			sudo mv phpmyadmin /opt/lampp/
-			sudo mv /opt/config.inc.php /opt/lampp/phpmyadmin
-			sudo chmod 755 /opt/lampp/phpmyadmin
-			sudo mkdir /opt/lampp/phpmyadmin/tmp/
-			sudo chmod 777 /opt/lampp/phpmyadmin/tmp/
-			cd
-		clear
-		echo "Instalado PhpMyAdmin"
-}	
+}		
 
 
 function version()
 
 {
-phpmyadminversion='5.2.1'
-			echo "elige la versión de PhpMyAdmin:(versión actual - 5.2.1)"
+pyversion=3.10.1
+
+			echo "elige la versión de Python:"
 			read VAR_NAME
-			echo "elegiste la versión de PhpMyAdmin: ($VAR_NAME)"
+			echo "elegiste la versión de Python: ($VAR_NAME)"
 		sleep 2s
-$VAR_NAME=$phpmyadminversion
+$VAR_NAME=$pyversion
 		clear
 }
+
+
+function installpy()
+
+{
+		clear
+			echo -e "\033[32mIniciando..."
+			sleep 2s
+
+### Instalador de Python
+cd ~
+rm -r pyth0ninst6ll
+mkdir pyth0ninst6ll
+sudo chmod -R 777 pyth0ninst6ll
+sudo chown -R $USER pyth0ninst6ll
+cd pyth0ninst6ll
+wget https://www.python.org/ftp/python/$pyversion/Python-$pyversion.tgz
+tar xvf Python-$pyversion.tgz$ cd Python-$pyversion
+./configure --enable-optimizations --with-ensurepip=install
+make -j 8
+sudo make altinstall
+cd ~
+rm -r pyth0ninst6ll
+			echo -e "\033[32m#----------------------------Versión de Python Instalado-----------------------------#"
+}
+
+
+
+##### Inicio del programa ######
 
 
 			fabricante
 			chiguire
 			inicio
 			version
-			phpmyadmin
+			installpy
 			chiguire
 			fabricante
-

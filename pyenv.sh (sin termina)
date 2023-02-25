@@ -1,0 +1,23 @@
+#### Requisitos para pyenv
+------------ On Debian/Ubuntu/Linux Mint ------------ 
+sudo apt install curl git-core gcc make zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libssl-dev python3-full
+#############################
+
+------------ On Fedora 22+ ------------
+yum install git gcc zlib-devel bzip2-devel readline-devel sqlite-devel openssl-devel python3-full
+##############################
+
+##Gestor de versiones Py
+cd ~
+rm -r .pyenv
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+echo '
+## pyenv configs
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
+' >> ~/.zshrc
+exec "$SHELL"
+pyenv install --list
+clean
