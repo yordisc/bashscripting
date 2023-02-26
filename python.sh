@@ -67,14 +67,23 @@ function inicio()
 function version()
 
 {
-pyversion=3.10.1
 
-			echo "elige la versión de Python:"
-			read VAR_NAME
-			echo "elegiste la versión de Python: ($VAR_NAME)"
+Xversion="3.10.1"
+			echo "elige la versión de Python (version actual: $Xversion)"
+read number
+while ! [[ $number =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || [ "$number" -lt 1 ]; do
+  echo "El valor introducido no es válido. Por favor, introduzca un número valido o tomara la versión $Xversion."
+  read number
+  if [[ -z "$number" ]]; then
+    number="$Xversion"
+  fi
+done
+    Xversion="$number"
+			echo "elegiste la versión de Python: ($Xversion)"
 		sleep 2s
-$VAR_NAME=$pyversion
 		clear
+
+
 }
 
 
@@ -86,6 +95,8 @@ function installpy()
 			sleep 2s
 
 ### Instalador de Python
+
+    pyversion="$Xversion"
 cd ~
 rm -r pyth0ninst6ll
 mkdir pyth0ninst6ll

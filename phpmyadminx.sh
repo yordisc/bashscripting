@@ -62,9 +62,34 @@ function inicio()
 
 }	
 
+
+function version()
+
+{
+
+Xversion="5.2.1"
+			echo "elige la versión de PhpMyAdmin"
+read number
+while ! [[ $number =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || [ "$number" -lt 1 ]; do
+  echo "El valor introducido no es válido. Por favor, introduzca un número valido o tomara la versión $Xversion."
+  read number
+  if [[ -z "$number" ]]; then
+    number="$Xversion"
+  fi
+done
+    Xversion="$number"
+			echo "elegiste la versión de PhpMyAdmin: ($Xversion)"
+		sleep 2s
+		clear
+
+
+}
+
+
 function phpmyadmin()
 
 {
+    phpmyadminversion="$Xversion"
 		### PhpMyAdmin
 			sudo mv /opt/lampp/phpmyadmin/config.inc.php /opt/
 			cd
@@ -83,19 +108,6 @@ function phpmyadmin()
 		clear
 		echo "Instalado PhpMyAdmin"
 }	
-
-
-function version()
-
-{
-phpmyadminversion='5.2.1'
-			echo "elige la versión de PhpMyAdmin:(versión actual - 5.2.1)"
-			read VAR_NAME
-			echo "elegiste la versión de PhpMyAdmin: ($VAR_NAME)"
-		sleep 2s
-$VAR_NAME=$phpmyadminversion
-		clear
-}
 
 
 			fabricante
