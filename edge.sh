@@ -1,6 +1,8 @@
-#!/bin/bash
-# Hecho por Yordis Cujar
-# Version 1
+#!/bin/bash 
+### Hecho por Yordis Cujar
+### https://www.microsoft.com/es-es/edge/download?form=MA13FJ
+
+FECHA=$(date +"%Y-%m-%d")
 
 function chiguire()
 
@@ -45,6 +47,7 @@ function fabricante()
 
 }		
 
+
 function inicio()
 
 {
@@ -52,69 +55,84 @@ function inicio()
 		clear
 			echo " "
 			echo " "
-			echo -e "\033[34m#######################################"
-			echo -e "\033[34m# Instalador de PhpMyAdmin para XAMPP #"
-			echo -e "\033[34m#######################################"
+			echo -e "\033[34m##############################"
+			echo -e "\033[34m####### Instalar Edge ########"
+			echo -e "\033[34m##############################"
 			echo " "
 			echo " "
 			sleep 2s
 		clear
 
-}	
+}		
 
 
-function version()
+function instalador () {
+PS3="Elige tu diestro de linux: [1: para salir]" 
+select opt in salir debian fedora; 
+do 
 
-{
+	case $opt in 
 
-Xversion="5.2.1"
-			echo "elige la versión de PhpMyAdmin"
-read number
-while ! [[ $number =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || [ "$number" -lt 1 ]; do
-  echo "El valor introducido no es válido. Por favor, introduzca un número valido o tomara la versión $Xversion."
-  read number
-  if [[ -z "$number" ]]; then
-    number="$Xversion"
-  fi
-done
-    Xversion="$number"
-			echo "elegiste la versión de PhpMyAdmin: ($Xversion)"
-		sleep 2s
+		salir)
+			break;; 
+
+		debian)
+			cd ~
+			rm 3dg3-st@bl3.txt
+# Obtener la lista de archivos de la carpeta
+			wget -q -O - https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-stable/ | grep -o 'href="[^"]*"' | cut -d '"' -f 2 > 3dg3-st@bl3.txt
+# Ordenar los archivos por versión y obtener el último
+			latest_file=$(sort -V 3dg3-st@bl3.txt | tail -n 1)
+# Descargar el archivo usando wget
+			wget https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-stable/$latest_file
+# Instalar
+			sudo dpkg -i $latest_file
+			rm 3dg3-st@bl3.txt
+			rm $latest_file
+			cd ~
+						echo -e "\033[32m#----------------------------Edge instalado-----------------------------#"
+					sleep 3s
 		clear
+			;; 
+
+		fedora)
+			cd ~
+			rm 3dg3-st@bl3.txt
+# Obtener la lista de archivos de la carpeta
+			wget -q -O - https://packages.microsoft.com/yumrepos/edge/ | grep -o 'href="[^"]*"' | cut -d '"' -f 2 > 3dg3-st@bl3.txt
+# Ordenar los archivos por versión y obtener el último
+			latest_file=$(sort -V 3dg3-st@bl3.txt | grep rpm | tail -n 1)
+# Descargar el archivo usando wget
+			wget https://packages.microsoft.com/yumrepos/edge/$latest_file
+# Instalar
+			sudo rpm -ivh $latest_file # o sudo yum install $latest_file
+			rm 3dg3-st@bl3.txt
+			rm $latest_file
+			cd ~
+			echo -e "\033[32m#----------------------------Edge instalado-----------------------------#"
+					sleep 3s
+			;;
+
+		*)
+			echo "$REPLY opción inválida"
+			;; 
+
+	esac 
+
+done
 
 
 }
 
 
-function phpmyadmin()
-
-{
-	phpmyadminversion="$Xversion"
-		### PhpMyAdmin
-			sudo mv /opt/lampp/phpmyadmin/config.inc.php /opt/
-			cd
-			wget -O phpmyadmin.zip https://files.phpmyadmin.net/phpMyAdmin/$phpmyadminversion/phpMyAdmin-$phpmyadminversion-all-languages.zip
-			unzip phpmyadmin.zip
-			rm phpmyadmin.zip
-			mv phpMyAdmin* phpmyadmin
-			sudo rm -r /opt/lampp/phpmyadmin
-			sudo mv phpmyadmin /opt/lampp/
-			sudo mv /opt/config.inc.php /opt/lampp/phpmyadmin
-			#sudo chmod 755 -R /opt/lampp/phpmyadmin
-			sudo mkdir /opt/lampp/phpmyadmin/tmp/
-			sudo chmod 777 -R /opt/lampp/phpmyadmin/tmp/
-			sudo chown -R mysql:mysql /tmp/user/0/
-			cd
-		clear
-		echo "Instalado PhpMyAdmin"
-}	
+##### Inicio del programa ######
 
 
 			fabricante
 			chiguire
 			inicio
 			version
-			phpmyadmin
+			instalador
 			chiguire
 			fabricante
 
