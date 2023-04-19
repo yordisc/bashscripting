@@ -51,6 +51,10 @@ function chiguire()
 			sudo snap forget mysql-workbench-community
 			sudo snap remove mysql-workbench-community
 		clear
+# Install snap
+			sudo dnf install snapd
+			sudo systemctl enable --now snapd.socket
+			sudo ln -s /var/lib/snapd/snap /snap
 # Workbench sql community - snap
 			sudo snap install mysql --beta
 			sudo snap install mysql-workbench-community
