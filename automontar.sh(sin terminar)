@@ -1,0 +1,9 @@
+sudo cp /etc/fstab /etc/fstab.bak
+
+sudo blkid
+
+sudo mousepad /etc/fstab
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+/dev/sdc1   /mnt/external   ntfs-3g   defaults   0   0
+
+user,errors=remount-ro,auto,exec,rw

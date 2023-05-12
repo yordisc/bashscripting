@@ -8,7 +8,7 @@ sudo rm /opt/pcloud.appimage
 tput setaf 3 # Amarillo
 echo "Descargando pCloud..."
 tput sgr0 # Restablece el color
-wget -O pcloud.appimage "https://p-def2.pcloud.com/cBZ0SKsydZa6UFOrZZZLhWno7Z2ZZraLZkZUD0DVZVHZbZe4ZGLZTzZNzZTHZv0ZQ4Z4JZt5Z0LZG5ZWJZyc9wVZYNzhCryxxQytsc0y4daYfk6bmRyy/pcloud"
+wget -O pcloud.appimage "https://p-def2.pcloud.com/cBZ0SKsydZa6UFOrZzP0h7ZZUSAPo7Z2ZZ70LZkZUD0DVZVHZbZe4ZGLZTzZNzZTHZv0ZQ4Z4JZt5Z0LZG5ZWJZyc9wVZpyTv13A0exjcdr4xyVsfkJ7NPTaV/pcloud"
 
 # Comprueba el código de salida de wget
 if [ $? -eq 0 ]
