@@ -8,7 +8,7 @@ sudo rm /opt/pcloud.appimage
 tput setaf 3 # Amarillo
 echo "Descargando pCloud..."
 tput sgr0 # Restablece el color
-wget -O pcloud.appimage "https://p-def2.pcloud.com/cBZ0SKsydZa6UFOrZzP0h7ZZUSAPo7Z2ZZ70LZkZUD0DVZVHZbZe4ZGLZTzZNzZTHZv0ZQ4Z4JZt5Z0LZG5ZWJZyc9wVZpyTv13A0exjcdr4xyVsfkJ7NPTaV/pcloud"
+wget -O pcloud.appimage "https://partner.pcloud.com/r/18331"
 
 # Comprueba el código de salida de wget
 if [ $? -eq 0 ]
@@ -30,19 +30,19 @@ then
     sudo mv pcloud.appimage /opt/pcloud.appimage
 
     # Crea un acceso directo en el menú de aplicaciones
-    tput setaf 3 # Amarillo
-    echo "Creando acceso directo en el menú de aplicaciones..."
-    tput sgr0 # Restablece el color
-    sudo rm /usr/share/applications/pcloud.desktop
-    sudo bash -c 'cat > /usr/share/applications/pcloud.desktop <<EOF
-[Desktop Entry]
-Name=pCloud
-Exec=/opt/pcloud.appimage
-Icon=
-Terminal=false
-Type=Application
-Categories=Internet;
-EOF'
+#    tput setaf 3 # Amarillo
+#    echo "Creando acceso directo en el menú de aplicaciones..."
+#    tput sgr0 # Restablece el color
+#    sudo rm /usr/share/applications/pcloud.desktop
+#    sudo bash -c 'cat > /usr/share/applications/pcloud.desktop <<EOF
+#[Desktop Entry]
+#Name=pCloud
+#Exec=/opt/pcloud.appimage
+#Icon=
+#Terminal=false
+#Type=Application
+#Categories=Internet;
+#EOF'
 
     # Comprueba si la instalación tuvo éxito
     if [ $? -eq 0 ]
@@ -60,3 +60,6 @@ else
     echo "Error al descargar pCloud"
     tput sgr0 # Restablece el color
 fi
+
+    #Inicializar
+    nohup /opt/pcloud.appimage &

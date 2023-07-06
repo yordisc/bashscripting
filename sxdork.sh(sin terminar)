@@ -1,8 +1,0 @@
-#https://esgeeks.com/sxdork-google-dorking-buscar-informacion/?feed_id=16941&_unique_id=640e5f5451c76&fbclid=IwAR1x-ePuQNEDTI-HgPRPDzzr6RqULGnHEjhXSVC3UjdAOdkXumZCCLzcyXI
-#Google Dorking
-cd ~
-git clone https://github.com/samhaxr/SXDork.git
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python SXDork.py
