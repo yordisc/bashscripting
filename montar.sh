@@ -9,7 +9,7 @@ read opcion
 
 if [ $opcion -eq 1 ]; then
   echo "Unidades no montadas:"
-  lsblk -o NAME,FSTYPE -n | awk '{gsub("ntfs", "ntfs-3g"); print}'
+  lsblk -o NAME,FSTYPE -n | awk '{gsub("ntfs", "ntfs3"); print}'
   echo "Seleccione una unidad para montar:"
   read unidad
   tipo_archivo=$(lsblk -o FSTYPE -n /dev/$unidad)
@@ -20,7 +20,7 @@ if [ $opcion -eq 1 ]; then
   uuid=$(sudo blkid -s UUID -o value /dev/$unidad)
 
   # Agregar la entrada al archivo fstab
-  echo "UUID=$uuid $punto_montaje $tipo_archivo user,errors=remount-ro,auto,exec,rw,trash,umask=000,uid=1000 0 0" | sudo tee -a /etc/fstab > /dev/nulll
+  echo "UUID=$uuid $punto_montaje $tipo_archivo fmask=111,dmask=000 1 0" | sudo tee -a /etc/fstab > /dev/nulll
 
   # Montar la unidad
   sudo mount -a
