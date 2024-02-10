@@ -20,7 +20,7 @@ if [ $opcion -eq 1 ]; then
   uuid=$(sudo blkid -s UUID -o value /dev/$unidad)
 
   # Agregar la entrada al archivo fstab
-  echo "UUID=$uuid $punto_montaje $tipo_archivo fmask=111,dmask=000 1 0" | sudo tee -a /etc/fstab > /dev/nulll
+  echo "UUID=$uuid $punto_montaje $tipo_archivo defaults,uid=1000,gid=1000 0 0" | sudo tee -a /etc/fstab > /dev/nulll
 
   # Montar la unidad
   sudo mount -a
